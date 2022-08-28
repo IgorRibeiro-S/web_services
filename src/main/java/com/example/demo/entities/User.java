@@ -14,10 +14,9 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-
 @Entity
-@Table(name="tb_user")
-public class User implements Serializable{
+@Table(name = "tb_user")
+public class User implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	@Id
@@ -26,12 +25,12 @@ public class User implements Serializable{
 	private String email;
 	private String password;
 	private String cnpj;
-	private AcessType acessType;
-	
-	@OneToMany(mappedBy="client")
+	private Integer acessType;
+
+	@OneToMany(mappedBy = "client")
 	@JsonIgnore
 	private List<Order> order = new ArrayList<>();
-	
+
 	public User() {
 	}
 
@@ -41,9 +40,8 @@ public class User implements Serializable{
 		this.email = email;
 		this.password = password;
 		this.cnpj = cnpj;
-		this.acessType = acessType;
+		setAcessType(acessType);
 	}
-
 
 	public String getCnpj() {
 		return cnpj;
@@ -54,11 +52,13 @@ public class User implements Serializable{
 	}
 
 	public AcessType getAcessType() {
-		return acessType;
+		return AcessType.valueOf(acessType);
 	}
 
 	public void setAcessType(AcessType acessType) {
-		this.acessType = acessType;
+		if (acessType != null) {
+			this.acessType = acessType.getCode();
+		}
 	}
 
 	public Long getId() {
