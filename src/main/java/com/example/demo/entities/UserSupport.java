@@ -9,26 +9,27 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class UserCommonClient implements Serializable {
+public class UserSupport implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	private String name;
+	private String nome;
 	private String cpf;
 	private String email;
 	private String telefone;
 	private AcessType acessType;
-
-	public UserCommonClient() {
+	
+	public UserSupport() {
+		
 	}
 
-	public UserCommonClient(Long id, String name, String cpf, String email, String telefone, AcessType acessType) {
+	public UserSupport(Long id, String nome, String cpf, String email, String telefone, AcessType acessType) {
 		super();
 		this.id = id;
-		this.name = name;
+		this.nome = nome;
 		this.cpf = cpf;
 		this.email = email;
 		this.telefone = telefone;
@@ -43,12 +44,12 @@ public class UserCommonClient implements Serializable {
 		this.id = id;
 	}
 
-	public String getName() {
-		return name;
+	public String getNome() {
+		return nome;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 
 	public String getCpf() {
@@ -75,6 +76,14 @@ public class UserCommonClient implements Serializable {
 		this.telefone = telefone;
 	}
 
+	public AcessType getAcessType() {
+		return acessType;
+	}
+
+	public void setAcessType(AcessType acessType) {
+		this.acessType = acessType;
+	}
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
@@ -88,16 +97,10 @@ public class UserCommonClient implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		UserCommonClient other = (UserCommonClient) obj;
+		UserSupport other = (UserSupport) obj;
 		return Objects.equals(id, other.id);
 	}
-
-	public AcessType getAcessType() {
-		return acessType;
-	}
-
-	public void setAcessType(AcessType acessType) {
-		this.acessType = acessType;
-	}
+	
+	
 
 }

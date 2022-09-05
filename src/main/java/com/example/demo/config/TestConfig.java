@@ -39,8 +39,8 @@ public class TestConfig implements CommandLineRunner {
 		Order o2 = new Order(null, Instant.parse("2019-07-21T03:42:10Z"), u2);
 		Order o3 = new Order(null, Instant.parse("2019-07-22T15:21:22Z"), u1);
 		
-		UserCommonClient usCommon = new UserCommonClient(null,"Douglas", "11111", "douglas@gmail.com","997878787");
-		
+		UserCommonClient usCommon = new UserCommonClient(null,"Douglas", "11111", "douglas@gmail.com","997878787", AcessType.CLIENT);
+
 		
 		userCommonClientRepository.saveAll(Arrays.asList(usCommon));
 		userRepository.saveAll(Arrays.asList(u1, u2));

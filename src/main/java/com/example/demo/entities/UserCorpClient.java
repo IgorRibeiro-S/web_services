@@ -9,31 +9,39 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class UserCommonClient implements Serializable {
+public class UserCorpClient implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-
+	
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	private String name;
-	private String cpf;
+	private String razaoSocial;
+	private String cnpj;
+	private String nome;
 	private String email;
 	private String telefone;
 	private AcessType acessType;
-
-	public UserCommonClient() {
+	
+	public UserCorpClient() {
 	}
 
-	public UserCommonClient(Long id, String name, String cpf, String email, String telefone, AcessType acessType) {
+
+
+	public UserCorpClient(Long id, String razaoSocial, String cnpj, String nome, String email, String telefone,
+			AcessType acessType) {
 		super();
 		this.id = id;
-		this.name = name;
-		this.cpf = cpf;
+		this.razaoSocial = razaoSocial;
+		this.cnpj = cnpj;
+		this.nome = nome;
 		this.email = email;
 		this.telefone = telefone;
 		this.acessType = acessType;
 	}
+
+
 
 	public Long getId() {
 		return id;
@@ -43,20 +51,28 @@ public class UserCommonClient implements Serializable {
 		this.id = id;
 	}
 
-	public String getName() {
-		return name;
+	public String getRazaoSocial() {
+		return razaoSocial;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setRazaoSocial(String razaoSocial) {
+		this.razaoSocial = razaoSocial;
 	}
 
-	public String getCpf() {
-		return cpf;
+	public String getCnpj() {
+		return cnpj;
 	}
 
-	public void setCpf(String cpf) {
-		this.cpf = cpf;
+	public void setCnpj(String cnpj) {
+		this.cnpj = cnpj;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 
 	public String getEmail() {
@@ -74,6 +90,20 @@ public class UserCommonClient implements Serializable {
 	public void setTelefone(String telefone) {
 		this.telefone = telefone;
 	}
+	
+	
+
+	public AcessType getAcessType() {
+		return acessType;
+	}
+
+
+
+	public void setAcessType(AcessType acessType) {
+		this.acessType = acessType;
+	}
+
+
 
 	@Override
 	public int hashCode() {
@@ -88,16 +118,8 @@ public class UserCommonClient implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		UserCommonClient other = (UserCommonClient) obj;
+		UserCorpClient other = (UserCorpClient) obj;
 		return Objects.equals(id, other.id);
-	}
-
-	public AcessType getAcessType() {
-		return acessType;
-	}
-
-	public void setAcessType(AcessType acessType) {
-		this.acessType = acessType;
 	}
 
 }
