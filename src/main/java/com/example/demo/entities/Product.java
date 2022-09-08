@@ -8,26 +8,39 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
-public class Product implements Serializable{
+public class Product implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String modelo;
 	private String numeroDeSerie;
 	private String descricao;
-	private Instant dataFabricacao;
-	private Instant dataCadastro;
 	
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'", timezone = "GMT")
+	private Instant dataFabricacao;
+	
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'", timezone = "America/Sao_Paulo")
+	private Instant dataCadastro;
+
+	@ManyToOne
+	@JoinColumn(name = "user_id")
+	private User user;
+	
+
 	public Product() {
 	}
 
 	public Product(Long id, String modelo, String numeroDeSerie, String descricao, Instant dataFabricacao,
-			Instant dataCadastro) {
+			Instant dataCadastro, User user) {
 		super();
 		this.id = id;
 		this.modelo = modelo;
@@ -35,6 +48,8 @@ public class Product implements Serializable{
 		this.descricao = descricao;
 		this.dataFabricacao = dataFabricacao;
 		this.dataCadastro = dataCadastro;
+		this.user = user;
+
 	}
 
 	public Long getId() {
@@ -102,5 +117,12 @@ public class Product implements Serializable{
 		return Objects.equals(id, other.id);
 	}
 
-	
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
 }

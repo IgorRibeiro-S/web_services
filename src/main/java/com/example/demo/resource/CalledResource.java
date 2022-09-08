@@ -9,25 +9,25 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.demo.entities.Order;
-import com.example.demo.services.OrderService;
+import com.example.demo.entities.Called;
+import com.example.demo.services.CalledService;
 
 @RestController
-@RequestMapping(value = "/order")
-public class OrderResource {
+@RequestMapping(value = "/calleds")
+public class CalledResource {
 
 	@Autowired
-	private OrderService service;
+	private CalledService service;
 	
 	@GetMapping
-	public ResponseEntity<List<Order>> findAll() {
-		List<Order> list = service.findAll();
+	public ResponseEntity<List<Called>> findAll() {
+		List<Called> list = service.findAll();
 		return ResponseEntity.ok().body(list);
 
 	}
 	@GetMapping(value ="/{id}" )
-	public ResponseEntity<Order> findById(@PathVariable Long id){
-		Order user = service.findById(id);
+	public ResponseEntity<Called> findById(@PathVariable Long id){
+		Called user = service.findById(id);
 		return ResponseEntity.ok().body(user);
 	}
 

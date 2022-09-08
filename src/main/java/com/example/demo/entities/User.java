@@ -1,22 +1,20 @@
 package com.example.demo.entities;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-@Table(name = "tb_user")
-public class User implements Serializable {
+public abstract class User implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	@Id
@@ -24,31 +22,65 @@ public class User implements Serializable {
 	private Long id;
 	private String email;
 	private String password;
-	private String cnpj;
 	private Integer acessType;
+	private String cpf;
+	private String telefone;
+	private String nome;
 
-	@OneToMany(mappedBy = "client")
+	@OneToMany(mappedBy = "user")
 	@JsonIgnore
-	private List<Order> order = new ArrayList<>();
+	private Set<Product> products = new HashSet<>();
+	
+	@OneToMany(mappedBy = "user")
+	@JsonIgnore
+	private Set<Called> calleds = new HashSet<>();
 
 	public User() {
 	}
 
-	public User(Long id, String email, String password, String cnpj, AcessType acessType) {
+	public User(Long id, String email, String password, Integer acessType, String cpf, String telefone, String nome) {
 		super();
 		this.id = id;
 		this.email = email;
 		this.password = password;
-		this.cnpj = cnpj;
-		setAcessType(acessType);
+		this.acessType = acessType;
+		this.cpf = cpf;
+		this.telefone = telefone;
+		this.nome = nome;
+
 	}
 
-	public String getCnpj() {
-		return cnpj;
+	public String getNome() {
+		return nome;
 	}
 
-	public void setCnpj(String cnpj) {
-		this.cnpj = cnpj;
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public String getCpf() {
+		return cpf;
+	}
+
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
+	}
+
+	public String getTelefone() {
+		return telefone;
+	}
+
+	public void setTelefone(String telefone) {
+		this.telefone = telefone;
+	}
+
+	public Set<Product> getProducts() {
+		return products;
+	}
+
+
+	public void setAcessType(Integer acessType) {
+		this.acessType = acessType;
 	}
 
 	public AcessType getAcessType() {
@@ -100,10 +132,6 @@ public class User implements Serializable {
 			return false;
 		User other = (User) obj;
 		return Objects.equals(id, other.id);
-	}
-
-	public List<Order> getOrder() {
-		return order;
 	}
 
 }
