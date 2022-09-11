@@ -9,7 +9,10 @@ import org.springframework.stereotype.Service;
 import com.example.demo.entities.Called;
 import com.example.demo.repositories.CalledRepository;
 
+import io.swagger.annotations.ApiOperation;
+
 @Service
+@ApiOperation(value = "Mostra lista")
 public class CalledService {
 	
 	@Autowired

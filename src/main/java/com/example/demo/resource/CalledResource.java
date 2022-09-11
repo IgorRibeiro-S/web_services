@@ -12,12 +12,18 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.demo.entities.Called;
 import com.example.demo.services.CalledService;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+
 @RestController
+@ApiOperation(value = "Mostra lista")
+@Api(value="calleds")
 @RequestMapping(value = "/calleds")
 public class CalledResource {
 
 	@Autowired
 	private CalledService service;
+	
 	
 	@GetMapping
 	public ResponseEntity<List<Called>> findAll() {

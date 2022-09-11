@@ -23,4 +23,9 @@ public class UserCommonClientService {
 		Optional<UserCommonClient> obj = repository.findById(id);
 		return obj.get();
 	}
+	
+	public UserCommonClient newUser(UserCommonClient obj) {
+		UserCommonClient user = repository.save(obj);
+		return user;
+	}
 }

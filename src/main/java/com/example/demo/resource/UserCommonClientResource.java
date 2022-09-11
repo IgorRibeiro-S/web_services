@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -13,6 +15,7 @@ import com.example.demo.entities.UserCommonClient;
 import com.example.demo.services.UserCommonClientService;
 
 @RestController
+
 @RequestMapping(value = "/UserClientCommon")
 public class UserCommonClientResource {
 
@@ -28,6 +31,14 @@ public class UserCommonClientResource {
 	@GetMapping(value ="/{id}" )
 	public ResponseEntity<UserCommonClient> findById(@PathVariable Long id){
 		UserCommonClient user = service.findById(id);
+		return ResponseEntity.ok().body(user);
+	}
+	
+	@PostMapping
+	public ResponseEntity<UserCommonClient> Save(@RequestBody UserCommonClient obj){
+		UserCommonClient user = service.newUser(obj);
+		//URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
+		//return ResponseEntity.created(uri).build();
 		return ResponseEntity.ok().body(user);
 	}
 

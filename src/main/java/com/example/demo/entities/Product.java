@@ -24,19 +24,28 @@ public class Product implements Serializable {
 	private String modelo;
 	private String numeroDeSerie;
 	private String descricao;
-	
-	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'", timezone = "GMT")
+
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'", timezone = "GMT")
 	private Instant dataFabricacao;
-	
-	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'", timezone = "America/Sao_Paulo")
+
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'", timezone = "America/Sao_Paulo")
 	private Instant dataCadastro;
 
 	@ManyToOne
 	@JoinColumn(name = "user_id")
 	private User user;
-	
 
 	public Product() {
+	}
+
+	public Product(String modelo, String numeroDeSerie, String descricao, Instant dataFabricacao, Instant dataCadastro, User user) {
+		this.modelo = modelo;
+		this.numeroDeSerie = numeroDeSerie;
+		this.descricao = descricao;
+		this.dataFabricacao = dataFabricacao;
+		this.dataCadastro = Instant.now();
+		this.user = user;
+
 	}
 
 	public Product(Long id, String modelo, String numeroDeSerie, String descricao, Instant dataFabricacao,
@@ -48,7 +57,7 @@ public class Product implements Serializable {
 		this.descricao = descricao;
 		this.dataFabricacao = dataFabricacao;
 		this.dataCadastro = dataCadastro;
-		this.user = user;
+		this.user= user;
 
 	}
 
