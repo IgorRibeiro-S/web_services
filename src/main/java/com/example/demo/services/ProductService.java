@@ -29,9 +29,29 @@ public class ProductService {
 		Product prod = repository.save(obj);
 		return prod;
 	}
+	
+	public void delete(Long id) {
+		findById(id);
+		repository.deleteById(id);
+	}
+	
+	public Product update(Product obj) {
+		Product newObj = findById(obj.getId());
+		updateData(newObj, obj);
+		return repository.save(newObj);
+		
+	}
 
-	public Product FromDto(ProductDto objDto) {
-		return new Product(objDto.getModelo(), objDto.getNumeroDeSerie(), objDto.getDescricao(),
+	private void updateData(Product newObj, Product obj) {
+		newObj.setModelo(obj.getModelo());
+		newObj.setDataCadastro(obj.getDataCadastro());
+		newObj.setDescricao(obj.getDescricao());
+		newObj.setNumeroDeSerie(obj.getNumeroDeSerie());
+		
+	}
+
+	public Product fromDto(ProductDto objDto) {
+		return new Product(objDto.getId(), objDto.getModelo(), objDto.getNumeroDeSerie(), objDto.getDescricao(),
 				objDto.getDataFabricacao(), objDto.getDataCadastro(), objDto.getUser());
 	}
 }

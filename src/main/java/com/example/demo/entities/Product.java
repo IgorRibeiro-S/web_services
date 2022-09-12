@@ -38,16 +38,6 @@ public class Product implements Serializable {
 	public Product() {
 	}
 
-	public Product(String modelo, String numeroDeSerie, String descricao, Instant dataFabricacao, Instant dataCadastro, User user) {
-		this.modelo = modelo;
-		this.numeroDeSerie = numeroDeSerie;
-		this.descricao = descricao;
-		this.dataFabricacao = dataFabricacao;
-		this.dataCadastro = Instant.now();
-		this.user = user;
-
-	}
-
 	public Product(Long id, String modelo, String numeroDeSerie, String descricao, Instant dataFabricacao,
 			Instant dataCadastro, User user) {
 		super();
@@ -57,7 +47,7 @@ public class Product implements Serializable {
 		this.descricao = descricao;
 		this.dataFabricacao = dataFabricacao;
 		this.dataCadastro = dataCadastro;
-		this.user= user;
+		this.user = user;
 
 	}
 

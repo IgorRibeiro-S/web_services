@@ -8,6 +8,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 public class ProductDto {
 	
+	private Long id;
 	private String modelo;
 	private String numeroDeSerie;
 	private String descricao;
@@ -22,6 +23,7 @@ public class ProductDto {
 	}
 	
 	public ProductDto(Product obj) {
+		this.id = obj.getId();
 		this.modelo = obj.getModelo();
 		this.numeroDeSerie = obj.getNumeroDeSerie();
 		this.descricao = obj.getDescricao();
@@ -30,6 +32,14 @@ public class ProductDto {
 		this.user = obj.getUser();
 	}
 	
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
 
 	public User getUser() {
 		return user;

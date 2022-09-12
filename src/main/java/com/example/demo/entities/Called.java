@@ -4,14 +4,17 @@ import java.io.Serializable;
 import java.time.Instant;
 import java.util.Objects;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Called implements Serializable {
@@ -30,11 +33,15 @@ public class Called implements Serializable {
 
 	@ManyToOne
 	@JoinColumn(name = "user_id")
+	@JsonIgnore
 	private User user;
 
 	@ManyToOne
 	@JoinColumn(name = "product_id")
 	private Product product;
+	
+	@OneToOne(mappedBy = "called", cascade = CascadeType.ALL)
+	private Schedule schedule;
 
 	public Called() {
 	}
@@ -46,9 +53,17 @@ public class Called implements Serializable {
 		this.titulo = titulo;
 		this.descricao = descricao;
 		this.imgUrl = imgUrl;
-		this.dataChamado = dataChamado;
+		this.dataChamado = Instant.now();
 		this.user = user;
 		this.product = product;
+	}
+
+	public Schedule getSchedule() {
+		return schedule;
+	}
+
+	public void setSchedule(Schedule schedule) {
+		this.schedule = schedule;
 	}
 
 	public Long getId() {

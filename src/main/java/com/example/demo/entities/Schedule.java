@@ -8,6 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.MapsId;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Schedule implements Serializable{
@@ -23,10 +25,14 @@ public class Schedule implements Serializable{
 	private String cep;
 	private String estado;
 	
+	@OneToOne
+	@MapsId
+	private Called called;
+	
 	public Schedule() {
 	}
 
-	public Schedule(Long id, Instant horario, String endereco, String cidade, String cep, String estado) {
+	public Schedule(Long id, Instant horario, String endereco, String cidade, String cep, String estado, Called called) {
 		super();
 		this.id = id;
 		this.horario = horario;
@@ -34,6 +40,15 @@ public class Schedule implements Serializable{
 		this.cidade = cidade;
 		this.cep = cep;
 		this.estado = estado;
+		this.called = called;
+	}
+
+	public Called getCalled() {
+		return called;
+	}
+
+	public void setCalled(Called called) {
+		this.called = called;
 	}
 
 	public Long getId() {
